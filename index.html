@@ -1,0 +1,120 @@
+<HTML>
+<HEAD></HEAD>
+<BODY>
+<SCRIPT>
+	function run() {
+		var checkboxes = document.getElementsByName("room");
+		var checkboxesChecked = [];
+		for (var i=0; i<checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				checkboxesChecked.push(parseInt(checkboxes[i].value,10));
+			}
+		}
+		
+		var text = main(checkboxesChecked);
+		document.getElementById('path').innerHTML = text;
+	}
+	
+	function resetBoxes() {
+		var checkboxes = document.getElementsByName("room");
+		for (var i=0; i<checkboxes.length; i++) {
+			if (checkboxes[i].value == 1 || checkboxes[i].value == 16) {
+				checkboxes[i].checked = true;
+			} else {
+				checkboxes[i].checked = false;
+			}
+				
+		}
+		var radiobuttons = document.getElementsByName("common");
+		for (var i=0; i<radiobuttons.length; i++) {
+			radiobuttons[i].checked = false;
+		}
+		
+		run();
+	}
+	
+	function chooseCommon() {
+		var radiobuttons = document.getElementsByName("common");
+		for (var i=0; i<radiobuttons.length; i++) {
+			if (radiobuttons[i].checked == true) {
+				if (radiobuttons[i].value == "1/11") {
+					check([1,11]);
+				} else if (radiobuttons[i].value == "2/10") {
+					check([2,10]);
+				} else if (radiobuttons[i].value == "3/4") {
+					check([3,4]);
+				} else if (radiobuttons[i].value == "5/8") {
+					check([5,8]);
+				} else if (radiobuttons[i].value == "6/7") { 
+					check([6,7]);
+				} else { // else if (radiobutton[i].value == "9")
+					check([9]);
+				}
+			}
+		}
+		run();
+	}
+	
+	function check(req) {
+		var checkboxes = document.getElementsByName("room");
+		
+		for (var i=0; i<checkboxes.length; i++) {
+			if (checkboxes[i].value == 1 || checkboxes[i].value == 16) {
+				checkboxes[i].checked = true;
+			} else {
+				checkboxes[i].checked = false;
+			}
+				
+		}
+		
+		for (var i=0; i<checkboxes.length; i++) {
+			for (var j=0; j<req.length; j++) {
+				if (checkboxes[i].value == req[j]) {
+					checkboxes[i].checked = true;
+				}
+			}
+		}
+	}
+	
+</SCRIPT>
+<SCRIPT src="path.js" onchange='run();'></SCRIPT>
+<h1>Ludi Maze PQ Shortest Path Finder</h1>
+
+<p>Select your rooms:</p>
+<form>
+	<input type="checkbox" name="room" value="1" checked disabled> 1&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="2" onchange='run();'> 2&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="3" onchange='run();'> 3&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="4" onchange='run();'> 4 <BR/>
+	<input type="checkbox" name="room" value="5" onchange='run();'> 5&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="6" onchange='run();'> 6&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="7" onchange='run();'> 7&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="8" onchange='run();'> 8 <BR/>
+	<input type="checkbox" name="room" value="9" onchange='run();'> 9&nbsp;&nbsp;
+	<input type="checkbox" name="room" value="10" onchange='run();'> 10 
+	<input type="checkbox" name="room" value="11" onchange='run();'> 11
+	<font color="DarkGrey">
+		<input type="checkbox" name="room" value="12" disabled> 12 <BR/>
+		<input type="checkbox" name="room" value="13" disabled> 13
+		<input type="checkbox" name="room" value="14" disabled> 14
+		<input type="checkbox" name="room" value="15" disabled> 15
+	</font>
+	<input type="checkbox" name="room" value="16" checked disabled> 16	
+<form/>
+
+<p>Common Choices:</p>
+<form>
+	<input type="radio" name="common" value="1/11" onchange="chooseCommon()"> 1/11 
+	<input type="radio" name="common" value="2/10" onchange="chooseCommon()"> 2/10 
+	<input type="radio" name="common" value="3/4" onchange="chooseCommon()"> 3/4 
+	<input type="radio" name="common" value="5/8" onchange="chooseCommon()"> 5/8 
+	<input type="radio" name="common" value="6/7" onchange="chooseCommon()"> 6/7 
+	<input type="radio" name="common" value="9" onchange="chooseCommon()"> 9<BR/><BR/>
+	<input type="button" name="common" value="reset" onclick="resetBoxes()">
+</form>
+
+<b><div id="path"> </div></b>
+<SCRIPT>run();</SCRIPT>
+
+</BODY>
+</HTML>
