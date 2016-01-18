@@ -20,6 +20,6 @@ https://cdn.rawgit.com/marekceglowski/LMPQ-Shortest-Path-Finder/master/index.htm
 
 Short link: 
 
-http://bit.ly/MR_LMPQ 
+http://bit.ly/MR-LMPQ
 
 (case sensitive)
